@@ -16,6 +16,7 @@ import javax.sql.DataSource;
 @Configuration
 public class ProjectConfig {
 
+    //Chapter 2
     @Bean
     @Profile("jdbc")
     public UserDetailsService userDetailsService(DataSource dataSource) {
