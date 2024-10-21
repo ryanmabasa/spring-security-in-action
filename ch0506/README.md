@@ -15,6 +15,11 @@
 
 ## Usage
 
+- Form Login
+- Basic
+- Custom Authentication Provider
+- Spring Security Contextr
+
 Hellow controller - HTTP BASIC
 
 Response

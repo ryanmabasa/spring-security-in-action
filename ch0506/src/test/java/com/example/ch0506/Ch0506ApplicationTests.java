@@ -12,7 +12,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-;
+
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -39,7 +39,7 @@ class Ch0506ApplicationTests {
 //	chapter 6-2
 
 	@Test
-	@DisplayName("Test calling /hello endpoint without authentication returns unauthorized.")
+	@DisplayName("Test calling /hello2 endpoint without authentication returns unauthorized.")
 	public void hello2Unauthenticated() throws Exception {
 		mvc.perform(get("/hello2"))
 			.andExpect(status().isUnauthorized());

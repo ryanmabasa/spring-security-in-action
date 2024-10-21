@@ -18,7 +18,7 @@ public class ProjectConfig {
 
     //Chapter 2
     @Bean
-    @Profile("jdbc")
+
     public UserDetailsService userDetailsService(DataSource dataSource) {
         String usersByUsernameQuery = "select username, password, enabled from spring.users where username = ?";
         String authsByUserQuery = "select username, authority from spring.authorities where username = ?";
@@ -29,7 +29,8 @@ public class ProjectConfig {
     }
 
     @Bean
-    public UserDetailsService userDetailsService() {
+    @Profile("ldap")
+    public UserDetailsService userDetailsServiceLdap() {
         var cs = new DefaultSpringSecurityContextSource("ldap://127.0.0.1:33389/dc=springframework,dc=org");
         cs.afterPropertiesSet();
 
