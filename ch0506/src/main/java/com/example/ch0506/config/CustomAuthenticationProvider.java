@@ -1,4 +1,4 @@
-package com.example.ch0506;
+package com.example.ch0506.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;

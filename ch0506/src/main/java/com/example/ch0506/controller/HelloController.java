@@ -1,4 +1,4 @@
-package controller;
+package com.example.ch0506.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -9,7 +9,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import service.HelloService;
+import com.example.ch0506.service.HelloService;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -26,10 +26,8 @@ public class HelloController {
         return "Hello";
     }
 
-
-
     @GetMapping("/hello2")
-    public String hello(Authentication a) {
+    public String hello2(Authentication a) {
         //        SecurityContext context = SecurityContextHolder.getContext();
         //        Authentication a = context.getAuthentication();
 
@@ -76,8 +74,5 @@ public class HelloController {
         }
     }
 
-    @GetMapping("/home")
-    public String home() {
-        return "home.html";
-    }
+
 }

@@ -1,4 +1,4 @@
-package service;
+package com.example.ch0506.service;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.context.SecurityContext;

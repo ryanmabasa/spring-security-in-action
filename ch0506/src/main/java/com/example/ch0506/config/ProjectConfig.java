@@ -1,4 +1,4 @@
-package config;
+package com.example.ch0506.config;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Bean;
@@ -37,29 +37,29 @@ public class ProjectConfig {
             SecurityContextHolder.MODE_INHERITABLETHREADLOCAL);
     }
 
-    @Bean
-    public UserDetailsService uds() {
-        var uds = new InMemoryUserDetailsManager();
-
-        uds.createUser(
-            User.withDefaultPasswordEncoder()
-                .username("john")
-                .password("12345")
-                .authorities("read")
-                .build()
-        );
-
-        uds.createUser(
-            User.withDefaultPasswordEncoder()
-                .username("bill")
-                .password("12345")
-                .authorities("write")
-                .build()
-        );
-
-
-        return uds;
-    }
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        var uds = new InMemoryUserDetailsManager();
+//
+//        uds.createUser(
+//            User.withDefaultPasswordEncoder()
+//                .username("john")
+//                .password("12345")
+//                .authorities("read")
+//                .build()
+//        );
+//
+//        uds.createUser(
+//            User.withDefaultPasswordEncoder()
+//                .username("bill")
+//                .password("12345")
+//                .authorities("write")
+//                .build()
+//        );
+//
+//
+//        return uds;
+//    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http)
@@ -68,16 +68,13 @@ public class ProjectConfig {
         http.httpBasic(c -> {
             c.realmName("OTHER");
             c.authenticationEntryPoint(new CustomEntryPoint());
-        });
+        })
+                .formLogin(c -> c.successHandler(authenticationSuccessHandler)
+                        .failureHandler(authenticationFailureHandler))
+                .authenticationProvider(authenticationProvider)
+                .authorizeHttpRequests(c -> c.anyRequest().authenticated());
 
 
-        http.formLogin(c ->
-            c.successHandler(authenticationSuccessHandler)
-                .failureHandler(authenticationFailureHandler)
-        );
-        http.authenticationProvider(authenticationProvider);
-
-        http.authorizeHttpRequests(c -> c.anyRequest().authenticated());
 
         return http.build();
     }

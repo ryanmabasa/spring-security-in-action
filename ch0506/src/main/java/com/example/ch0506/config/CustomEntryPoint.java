@@ -1,4 +1,4 @@
-package config;
+package com.example.ch0506.config;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

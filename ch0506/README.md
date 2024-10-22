@@ -20,7 +20,7 @@
 - Custom Authentication Provider
 - Spring Security Contextr
 
-Hellow controller - HTTP BASIC
+Hellow com.example.ch0506.controller - HTTP BASIC
 
 Response
 WWW-Authenticate: Basic realm="OTHER"
@@ -35,7 +35,7 @@ Example:
 curl -v http://localhost:8080/hello
 ```
 
-Ciao controller - DelegatingSecurityContextCallable
+Ciao com.example.ch0506.controller - DelegatingSecurityContextCallable
 
 Example:
 
@@ -43,7 +43,7 @@ Example:
 curl -u user:2eb3f2e8-debd-420c-9680-48159b2ff905 http://localhost:8080/ciao
 ```
 
-Hola controller - DelegatingSecurityContextExecutorService
+Hola com.example.ch0506.controller - DelegatingSecurityContextExecutorService
 
 Example:
 
@@ -51,7 +51,7 @@ Example:
 curl -u user:5a5124cc-060d-40b1-8aad-753d3da28dca http://localhost:8080/hola
 ```
 
-Form login controller
+Form login com.example.ch0506.controller
 ```bash
 curl -u user:cdd430f6-8ebc-49a6-9769-b0f3ce571d19 http://localhost:8080/home
 ```
