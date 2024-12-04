@@ -15,19 +15,6 @@
 
 ## Usage
 
-- Form Login
-- Basic
-- Custom Authentication Provider
-- Spring Security Contextr
-
-Hellow com.example.ch0506.controller - HTTP BASIC
-
-Response
-WWW-Authenticate: Basic realm="OTHER"
-
-< HTTP/1.1 401
-< Set-Cookie: JSESSIONID=459BAFA7E0E6246A463AD19B07569C7B; Path=/; HttpOnly
-< message: Luke, I am your father!
 
 Example:
 

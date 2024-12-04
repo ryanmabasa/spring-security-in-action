@@ -21,7 +21,7 @@ public class BookService {
             );
 
 
-
+    //return object is records
     @PostAuthorize("returnObject.roles.contains('reader')")
     public Employee getBookDetails(String name) {
         return records.get(name);
