@@ -2,7 +2,6 @@ package com.example.ch14;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.security.MessageDigest;
@@ -11,10 +10,10 @@ import java.security.SecureRandom;
 import java.util.Base64;
 
 @ExtendWith(SpringExtension.class)
-class Ch14ApplicationTests {
+class CodeVerifierAndChallengeTest {
 
 	@Test
-	void contextLoads() throws NoSuchAlgorithmException {
+	void testCodeChallenge() throws NoSuchAlgorithmException {
 		SecureRandom secureRandom = new SecureRandom();
 		byte [] code = new byte[32];
 		secureRandom.nextBytes(code);

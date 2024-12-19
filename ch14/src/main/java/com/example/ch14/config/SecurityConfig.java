@@ -15,7 +15,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
@@ -27,7 +26,6 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
-import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
 import org.springframework.security.oauth2.server.authorization.settings.OAuth2TokenFormat;
 import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
@@ -104,8 +102,17 @@ public class SecurityConfig {
     * that initially sent this request. The PKCE flow is enabled by default.
     * */
 
+    /*
+    *
+    * Because we enabled the OpenID Connect protocol,
+    * so we don’t only rely on OAuth 2, an ID token is also present in the token response.
+    * If the client had been registered using the refresh token grant type,
+    *
+    *  a refresh token would have also been generated and sent through the response.
+    * */
     @Bean
-    public RegisteredClientRepository registeredClientRepository() {
+    @Profile("authorization-code")
+    public RegisteredClientRepository authCodeRegisteredClientRepository() {
         RegisteredClient registeredClient = RegisteredClient
         .withId(UUID.randomUUID().toString())
         .clientId("client")
@@ -123,6 +130,40 @@ public class SecurityConfig {
                 )
         .scope(OidcScopes.OPENID)
         .build();
+
+        return new InMemoryRegisteredClientRepository(registeredClient);
+    }
+
+
+    /*
+    * none-opaque tokens - store data JWT
+    * */
+
+    /*
+    * As an opaque token doesn’t contain data,
+    * how can someone validate it and get more details about the client (and potentially the user)
+    * for whom the authorization server generated it?
+    * The easiest (and most used) way is to directly ask the authorization server.
+    * The authorization server exposes an endpoint where one can send a request with the token.
+    * The authorization server replies with the needed details about the token.
+    * This process is called introspection (figure 14.8).
+    * */
+    @Bean
+    @Profile("client-credentials")
+    public RegisteredClientRepository registeredClientRepository() {
+        RegisteredClient registeredClient =
+                RegisteredClient.withId(UUID.randomUUID().toString())
+                        .clientId("client")
+                        .clientSecret("secret")
+                        .clientAuthenticationMethod(
+                                ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+      .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+                        .tokenSettings(TokenSettings.builder()
+                                .accessTokenFormat(OAuth2TokenFormat.REFERENCE)        //access token format defines opaqueness
+                                .accessTokenTimeToLive(Duration.ofHours(12))
+                        .build())
+                .scope("CUSTOM")
+      .build();
 
         return new InMemoryRegisteredClientRepository(registeredClient);
     }
