@@ -220,6 +220,7 @@ public class SecurityConfig {
 
 
     @Bean
+    @Profile("ch15")
     public RegisteredClientRepository registeredClientRepositoryComplete() {
         RegisteredClient registeredClient =
         RegisteredClient.withId(UUID.randomUUID().toString())

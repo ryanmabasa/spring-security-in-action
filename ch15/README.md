@@ -13,9 +13,11 @@ The list of steps we need to follow to make our resource server understand the c
 5. Test the endpoint, and check that the authentication object contains the custom "priority" field.
 
 
+Make sure to run CH14. Get the access token from ch14
+
 Opaque
 ```
-curl 'http://localhost:9090/demo' --header 'Authorization: Bearer fARkF0ABbQ5FY4ZrzWaOH20idNcRWDXobq1aAMdOzOnGMpRKsUTqFgvfIRRPQL5GKPYTKhvUYcPSLOn8lh_rRGu9siMv5grWr8kbFK1kMnyxQBxxEKmeHwjtclLUU-mV'
+curl 'http://localhost:9090/demo' --header 'Authorization: Bearer 2uzbQIODe31d4IdwV3zTjMjWqCGgRRymeXTKke_StabjgtjX-gpZOAPeY6p65qSPMfmOpNdw2Z2UsExrshOIOVmkhGD4SyD8X0fSIYK0rUZgs1qpCc8trrU5MgE9HKQ6'
 
 {
     "principal": {
