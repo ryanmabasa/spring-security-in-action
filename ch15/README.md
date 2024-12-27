@@ -13,7 +13,9 @@ The list of steps we need to follow to make our resource server understand the c
 5. Test the endpoint, and check that the authentication object contains the custom "priority" field.
 
 
-Make sure to run CH14. Get the access token from ch14
+Make sure to run CH14. 
+
+Get the access token from ch14. Grant type should be client-credentials profile in ch14
 
 Opaque
 ```

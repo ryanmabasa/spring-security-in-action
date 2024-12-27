@@ -124,7 +124,7 @@ public class SecurityConfig {
                         ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(
                         AuthorizationGrantType.AUTHORIZATION_CODE)
-                .redirectUri("https://www.manning.com/authorized")
+                .redirectUri("https://www.manning.com/login/oauth2/code/my_authorization_server")
                 .tokenSettings(
                         TokenSettings.builder()
                                 .accessTokenFormat(OAuth2TokenFormat.REFERENCE)
@@ -165,7 +165,7 @@ public class SecurityConfig {
                                 .accessTokenFormat(OAuth2TokenFormat.REFERENCE)        //access token format defines opaqueness
                                 .accessTokenTimeToLive(Duration.ofHours(12))
                                 .build())
-                        .scope("CUSTOM")
+                        .scope(OidcScopes.OPENID) // CUSTOM or OidcScopes.OPENID
                         .build();
 
         return new InMemoryRegisteredClientRepository(registeredClient);
