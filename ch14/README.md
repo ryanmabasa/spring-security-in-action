@@ -43,7 +43,7 @@ curl -X POST 'http://localhost:8080/oauth2/token?client_id=client&redirect_uri=h
 Client Credentials
 
 ```
-curl -X POST 'http://localhost:8080/oauth2/token' --header 'Authorization: Basic Y2xpZW50OnNlY3JldA==' --header 'Content-Type: application/x-www-form-urlencoded' --data 'grant_type=client_credentials&scope=CUSTOM'
+curl -X POST 'http://localhost:8080/oauth2/token' --header 'Authorization: Basic Y2xpZW50OnNlY3JldA==' --header 'Content-Type: application/x-www-form-urlencoded' --data 'grant_type=client_credentials&scope=openid'
 
 Non Opaque
 {
