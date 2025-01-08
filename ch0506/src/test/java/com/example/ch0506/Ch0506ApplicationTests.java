@@ -9,6 +9,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -54,11 +55,21 @@ class Ch0506ApplicationTests {
 			.andExpect(status().isOk());
 	}
 
+
+	/*
+	* Figure 18.5 The difference between using annotations and the RequestPostProcessor
+	* to create the test security environment. When using annotations,
+	* the framework sets up the test security environment first.
+	*  When using a RequestPostProcessor, the test request is created and
+	* then changed to define other constraints such as the test security environment.
+	* In the figure, the points where the framework applies
+	* the test security environment are shaded.
+	* */
 	@Test
 	@DisplayName("Test calling /ciao endpoint authenticated returns ok.")
-	@WithMockUser(username = "mary")
 	public void ciaoAuthenticated() throws Exception {
-		mvc.perform(get("/ciao"))
+		mvc.perform(get("/ciao")
+				.with(user("mary")))
 			.andExpect(content().string("Ciao, mary!"))
 			.andExpect(status().isOk());
 	}
